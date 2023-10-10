@@ -1,0 +1,22 @@
+version: '3'
+services:
+  sahaya-frontend:
+    build:
+      context: ./sahaya-frontend  
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"  
+    depends_on:
+      - sahaya-backend
+    volumes:
+      - ./sahaya-frontend:/sahaya-frontend
+  sahaya-backend:
+    build:
+      context: ./sahaya-backend  
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./sahaya-backend:/sahaya-backend
+
+

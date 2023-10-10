@@ -17,6 +17,24 @@ user = db['users']
 hostname = socket.gethostname()
 IPAddr = socket.gethostbyname(hostname)
 
+def get_wifi_ip_address():
+    try:
+        # Create a socket object
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+        # Connect to a remote server, but we don't actually send data
+        s.connect(("8.8.8.8", 80))
+
+        # Get the local IP address associated with the WiFi interface
+        ip_address = s.getsockname()[0]
+        
+        # Close the socket
+        s.close()
+
+        return ip_address
+    except Exception as e:
+        return str(e)
+
 # @app.route('/')
 # def home():
 #     user.insert_one({'id':1000})
@@ -80,4 +98,4 @@ def viewpointlink():
 
 if __name__=="__main__":
     print(IPAddr)
-    app.run(debug=True ,host='192.168.0.138')
+    app.run(debug=True ,port=5000,host='0.0.0.0')
